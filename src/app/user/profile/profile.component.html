@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand mx-auto">Profil</a>
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div> -->
+</nav>
+
+<div class="h-100 py-3 position-relative">
+  <div *ngIf="!loading" class="position-absolute loadingDiv d-flex">
+    <div class="loader m-auto"></div> 
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Upload</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+          </div>
+        </div> -->
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex" (click)="onOpenProfileModal('lastname')"><span class="font-weight-normal">Nom</span><span class="ml-auto font-weight-light">{{ user.firstname }}</span></li>
+          <li class="list-group-item d-flex" (click)="onOpenProfileModal('firstname')"><span class="font-weight-normal">Prénom</span><span class="ml-auto font-weight-light">{{ user.lastname }}</span></li>
+          <li class="list-group-item d-flex" (click)="onOpenProfileModal('email')"><span class="font-weight-normal">Adresse email</span><span class="ml-auto font-weight-light">{{ user.email }}</span></li>
+          <li class="list-group-item d-flex" (click)="onOpenProfileModal('phone')"><span class="font-weight-normal">Téléphone</span><span class="ml-auto font-weight-light">{{ user.phone }}</span></li>
+          <li class="list-group-item d-flex" (click)="onOpenProfileModal('birth')"><span class="font-weight-normal">Date de naissance</span><span class="ml-auto font-weight-light">{{ user.birth | date : 'dd/MM/yyyy' }}</span></li>
+          <li class="list-group-item d-flex" (click)="onOpenProfileModal('sex')"><span class="font-weight-normal">Sexe</span><span class="ml-auto font-weight-light">{{ user.sex }}</span></li>
+          <li class="list-group-item d-flex" (click)="onSignOut()"><span class="font-weight-normal text-danger">Déconnexion</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-tabs></app-tabs>
+
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title mx-auto" id="exampleModalLongTitle">{{ profileModalTitle }}</h5>
+      </div>
+      <div class="modal-body" [ngSwitch]="profileModalObject">
+        <input *ngSwitchCase="'lastname'" type="text" placeholder="Votre nom" class="form-control profileModalInput">
+        <input *ngSwitchCase="'firstname'" type="text" placeholder="Votre prénom" class="form-control profileModalInput">
+        <input *ngSwitchCase="'email'" type="email" placeholder="Votre adresse email" class="form-control profileModalInput">
+        <input *ngSwitchCase="'phone'" type="tel" placeholder="Votre téléphone" class="form-control profileModalInput">
+        <input *ngSwitchCase="'birth'" type="date" class="form-control profileModalInput">
+        <select *ngSwitchCase="'sex'" class="form-control profileModalInput">
+          <option>Homme</option>
+          <option>Femme</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <div class="w-50">
+          <button type="button" class="btn btn-outline-danger w-100" data-dismiss="modal">Annuler</button>
+        </div>
+        <div class="w-50">
+          <button type="button" class="btn btn-outline-primary w-100" (click)="onSaveProfile()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

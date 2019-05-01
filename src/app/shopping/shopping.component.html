@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+  <a class="navbar-brand mx-auto">Liste de courses</a>
+</nav>
+
+<div class="container py-3 mb-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="bg-light rounded shadow p-3 my-2 d-flex" *ngFor="let ingredient of shoppingList; let i of index">
+        <i class="far fa-square text-primary fs-20 my-auto" *ngIf="ingredient.isChecked === false" (click)="changeIngCheckValue(i)"></i>
+        <i class="fas fa-check text-primary fs-20 my-auto" *ngIf="ingredient.isChecked === true" (click)="changeIngCheckValue(i)"></i>
+        <h2 class="fs-20 font-weight-normal my-auto ml-3">{{ ingredient.name }} - {{ ingredient.quantity }} <span *ngIf="ingredient.unit !== 'aucun'">{{ ingredient.unit }}</span></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-tabs></app-tabs>

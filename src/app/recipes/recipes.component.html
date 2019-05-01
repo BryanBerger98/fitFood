@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+  <a class="navbar-brand mx-auto">Recettes</a>
+</nav>
+
+<div class="container position-relative mb-4 pb-4">
+  <div class="row py-3">
+    <div class="col-12">
+      <p class="fs-20 text-muted text-center" *ngIf="allRecipes.length < 1">Vous n'avez pas encore de recettes</p>
+    </div>
+    <div class="col-12" *ngFor="let recipe of allRecipes; let i = index">
+      <div class="bg-light rounded m-2 shadow py-3 px-3 position-relative">
+        <div class="row">
+          <div class="col-11" (click)="onDisplayRecipe(i)">
+            <h2 class="font-weight-light fs-30">{{ recipe.title }}</h2>
+            <p class="fs-15 mb-0" *ngIf="recipe.persons !== ''"><i class="fas fa-user-friends"></i> Pour {{ recipe.persons }} personne(s)</p>
+            <p class="fs-15 mb-0 ml-auto" *ngIf="recipe.globalTime !== ''"><i class="far fa-clock"></i> {{ recipe.globalTime }}</p>
+          </div>
+        </div>
+        <i class="far fa-star addToShoppingListBtn position-absolute text-warning" *ngIf="recipe.toShop === false" (click)="onAddRecipeToShoppingList(i)"></i>
+        <i class="fas fa-star addToShoppingListBtn position-absolute text-warning" *ngIf="recipe.toShop === true" (click)="onRemoveRecipeFromShoppingList(i)"></i>
+      </div>
+    </div>
+  </div>
+  <button type="button" (click)="onNewRecipe()" class="btn btn-primary rounded-circle fixed-bottom addRecipeBtn shadow d-flex"><i class="fas fa-plus mx-auto"></i></button>
+</div>
+
+<app-tabs></app-tabs>

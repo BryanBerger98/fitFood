@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+  <a routerLink="/recipes" class="nav-link text-primary position-absolute pl-0 fs-25"><i class="fas fa-arrow-left"></i></a>
+  <a class="navbar-brand mx-auto">{{ recipe.title }}</a>
+</nav>
+
+<div class="container pt-3 pb-5 mb-4">
+  <p class="fs-20"><i class="fas fa-user-friends"></i> Pour {{ recipe.persons }} personne(s)</p>
+  <div class="row">
+    <div class="col-6">
+        <p><i class="fas fa-user-clock"></i> {{ recipe.prepareTime }} de préparation</p>
+    </div>
+    <div class="col-6">
+        <p><i class="far fa-clock"></i> {{ recipe.globalTime }} au total</p>
+    </div>
+  </div>
+  <h2 class="fs-25 mb-0">Ingrédients</h2>
+  <hr class="my-2 bg-dark">
+  <div class="row">
+    <div class="col-12">
+      <div *ngFor="let ingredient of recipe.ingredients">
+        <p class="fs-20">{{ ingredient.name }} : {{ ingredient.quantity }} <span *ngIf="ingredient.unit !== 'aucun'">{{ ingredient.unit }}</span></p>
+      </div>
+    </div>
+  </div>
+  <h2 class="fs-25 mb-0">Etapes</h2>
+  <hr class="mt-2 mb-0 bg-dark">
+  <div class="row">
+    <div class="col-12">
+      <div class="bg-light rounded shadow my-3 p-3" *ngFor="let step of recipe.steps">
+        <p class="fs-20 mb-0">{{ step }}</p>
+      </div>
+    </div>
+  </div>
+  <hr class="my-2 bg-dark">
+  <div class="row">
+    <div class="col-6">
+      <button class="btn btn-outline-primary w-100" type="button" (click)="onEditRecipe()">Modifier</button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-outline-danger w-100" type="button" data-toggle="modal" data-target="#removeRecipeModal">Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<app-tabs></app-tabs>
+
+<div class="modal fade" id="removeRecipeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font-weight-normal mx-auto" id="removeRecipeModalTitle">Supprimer la recette ?</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <!-- <div class="modal-body">
+          ...
+        </div> -->
+        <div class="modal-footer">
+          <div class="col-6">
+              <button type="button" class="btn btn-outline-danger w-100" data-dismiss="modal">Annuler</button>
+          </div>
+          <div class="col-6">
+              <button type="button" class="btn btn-outline-success w-100" (click)="onRemoveRecipe()">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,115 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+  <a routerLink="/recipes" class="nav-link text-primary position-absolute pl-0 fs-25"><i class="fas fa-arrow-left"></i></a>
+  <a class="navbar-brand mx-auto">Editeur de recette</a>
+</nav>
+
+<!-- <div class="container position-relative">
+  <button type="button" (click)="onNewRecipe()" class="btn btn-primary rounded-circle fixed-bottom addRecipeBtn"><i class="fas fa-plus"></i></button>
+</div> -->
+
+<div class="container py-3 pb-5 mb-4 position-relative">
+  <form [formGroup]="recipeForm" (ngSubmit)="onSaveRecipe()">
+    <div class="row">
+      <div class="col-7">
+          <h2 class="fs-20 font-weight-normal mt-2 mb-0 text-primary">Informations</h2>
+      </div>
+      <div class="col-5">
+        <button type="submit" class="btn btn-outline-success w-100" [disabled]="recipeForm.invalid">Enregistrer</button>
+      </div>
+    </div>
+
+    <hr class="bg-dark mt-2 mb-4">
+    <div class="form-group">
+      <label for="recipeTitleInput">Titre</label>
+      <input type="text" formControlName="title" placeholder="Titre" id="recipeTitleInput" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="recipePersonesInput">Quantité de personnes</label>
+        <select class="form-control" id="recipePersonesInput" formControlName="persons">
+          <option selected>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>8</option>
+          <option>10</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="col-6 form-group">
+          <label for="recipePrepareTimeInput">Temps de préparation</label>
+          <input type="time" formControlName="prepareTime" min="00:05" value="00:05" max="10:00" id="recipePrepareTimeInput" class="form-control">
+        </div>
+        <div class="col-6 form-group">
+          <label for="recipePrepareTimeInput">Temps global</label>
+          <input type="time" formControlName="globalTime" min="00:05" value="00:05" max="10:00" id="recipePrepareTimeInput" class="form-control">
+        </div>
+      </div>
+      <h2 class="fs-20 font-weight-normal mt-2 mb-0 text-primary">Ingrédients</h2>
+      <hr class="bg-dark mt-2 mb-4">
+      <div class="form-row">
+        <div class="col-5 form-group">
+            <input type="text" placeholder="Ingrédient" id="recipeIngredientInput" class="form-control">
+        </div>
+        <div class="col-2 form-group">
+          <input type="text" placeholder="Qté" id="recipeQuantityInput" class="form-control">
+        </div>
+        <div class="col-3 form-group">
+          <select class="form-control" id="recipeUnitInput">
+            <option selected>g</option>
+            <option>kg</option>
+            <option>L</option>
+            <option>cL</option>
+            <option>mL</option>
+            <option>cuillère à café</option>
+            <option>cuillère à soupe</option>
+            <option>aucun</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary rounded-circle" (click)="onAddIngredient()" type="button"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" *ngFor="let ingredient of addedIngredients; let i = index">
+          <div class="mx-3 my-1 bg-light border-rounded d-flex shadow-sm">
+              <p class="font-weight-normal m-0 px-3 py-1">{{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit }}</p>
+              <i class="fas fa-times text-danger ml-auto my-auto mr-3" (click)="onRemoveIngredient(i)"></i>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="fs-20 font-weight-normal mt-2 mb-0 text-primary">Etapes de préparation</h2>
+      <hr class="bg-dark mt-2 mb-4">
+
+      <div class="form-row">
+        <div class="col-10 form-group">
+            <textarea class="form-control w-100" id="recipeStepInput" placeholder="Ajouter une étape"></textarea>
+        </div>
+        <div class="col-2 d-flex">
+          <button class="btn btn-primary rounded-circle m-auto" type="button" (click)="onAddStep()"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" *ngFor="let step of addedSteps; let i = index">
+          <div class="mx-3 my-1 bg-light border-rounded d-flex shadow-sm">
+              <p class="font-weight-normal m-0 px-3 py-1">{{ step }}</p>
+              <i class="fas fa-times text-danger ml-auto my-auto mr-3" (click)="onRemoveStep(i)"></i>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row mt-3">
+        <div class="col-6">
+            <button class="btn btn-outline-danger w-100">Annuler</button>
+        </div>
+        <div class="col-6">
+          <button type="submit" class="btn btn-outline-primary w-100">Enregistrer</button>
+        </div>
+      </div> -->
+      <!-- <button type="submit" class="btn btn-primary rounded-circle fixed-bottom addRecipeBtn shadow"><i class="far fa-save"></i></button> -->
+  </form>
+</div>
+
+<app-tabs></app-tabs>
